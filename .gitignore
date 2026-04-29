@@ -146,3 +146,5 @@ test/.test_coverage.dart
 
 # Melos
 .melos/
+
+.fvm/
