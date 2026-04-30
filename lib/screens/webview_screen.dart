@@ -272,8 +272,8 @@ class _WebViewScreenState extends ConsumerState<WebViewScreen> {
                   },
                   onLoadStart: (controller, url) async {
                     final urlString = url?.toString() ?? '';
-                    print('=== LOAD START ===');
-                    print('URL: $urlString');
+                    // print('=== LOAD START ===');
+                    // print('URL: $urlString');
 
                     setState(() {
                       isLoading = true;
@@ -296,8 +296,8 @@ class _WebViewScreenState extends ConsumerState<WebViewScreen> {
                   },
                   onLoadStop: (controller, url) async {
                     final urlString = url?.toString() ?? '';
-                    print('=== LOAD STOP ===');
-                    print('URL: $urlString');
+                    // print('=== LOAD STOP ===');
+                    // print('URL: $urlString');
 
                     setState(() {
                       isLoading = false;
@@ -484,10 +484,10 @@ class _WebViewScreenState extends ConsumerState<WebViewScreen> {
 
   // ✅ Back Navigation Handler
   Future<void> _handleBackNavigation() async {
-    print('=== HANDLE BACK NAVIGATION ===');
-    print('Current URL: $currentUrl');
-    print('canGoBack: $canGoBack');
-    print('isGoogleSignInPage: $isGoogleSignInPage');
+    ('=== HANDLE BACK NAVIGATION ===');
+    // print('Current URL: $currentUrl');
+    // print('canGoBack: $canGoBack');
+    // prinprintt('isGoogleSignInPage: $isGoogleSignInPage');
 
     if (isNavigating) return;
 
@@ -519,7 +519,7 @@ class _WebViewScreenState extends ConsumerState<WebViewScreen> {
             return;
           }
         } catch (e) {
-          print('JS back failed: $e');
+          // print('JS back failed: $e');
         }
 
         // ✅ Method 2: Multiple goBack attempts
@@ -570,7 +570,7 @@ class _WebViewScreenState extends ConsumerState<WebViewScreen> {
 
       await _updateNavigationState();
     } catch (e) {
-      print('Back navigation error: $e');
+      // print('Back navigation error: $e');
     } finally {
       setState(() {
         isNavigating = false;
@@ -588,7 +588,7 @@ class _WebViewScreenState extends ConsumerState<WebViewScreen> {
         canGoForward = forward;
       });
     } catch (e) {
-      print('Error updating navigation state: $e');
+      // print('Error updating navigation state: $e');
     }
   }
 
