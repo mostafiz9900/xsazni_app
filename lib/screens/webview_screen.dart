@@ -11,88 +11,88 @@ import '../../../core/router/app_router.dart';
 import '../core/widgets/bottom_nav_bar.dart';
 import '../providers/webview_notifier.dart';
 
-class WebViewScreen3 extends ConsumerWidget {
-  const WebViewScreen3({super.key});
+// class WebViewScreen3 extends ConsumerWidget {
+//   const WebViewScreen3({super.key});
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final webState = ref.watch(webViewProvider);
-    final webNotifier = ref.read(webViewProvider.notifier);
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final webState = ref.watch(webViewProvider);
+//     final webNotifier = ref.read(webViewProvider.notifier);
 
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (didPop) async {
-        if (didPop) return;
-        await webNotifier.handleBackNavigation();
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: [
-              if (webState.hasError)
-                ErrorCustomWidget(onRetry: webNotifier.reload)
-              else
-                InAppWebView(
-                  initialUrlRequest: URLRequest(
-                    url: WebUri(AppConfiguration.appUrl),
-                  ),
-                  initialSettings: _getWebViewSettings(),
-                  onWebViewCreated: (controller) =>
-                      webNotifier.setController(controller),
-                  onLoadStart: (controller, url) =>
-                      webNotifier.setLoadStart(url?.toString() ?? ''),
-                  onLoadStop: (controller, url) =>
-                      webNotifier.setLoadStop(url?.toString() ?? ''),
-                  onProgressChanged: (controller, p) =>
-                      webNotifier.updateProgress(p),
-                  onLoadError: (controller, url, code, message) =>
-                      webNotifier.setLoadError(),
-                  shouldOverrideUrlLoading: (controller, action) =>
-                      _handleUrlOverride(action),
-                ),
-              if (webState.isLoading && webState.progress < 100)
-                LoadingWidget(progress: webState.progress / 100),
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomNavBar(),
-      ),
-    );
-  }
+//     return PopScope(
+//       canPop: false,
+//       onPopInvoked: (didPop) async {
+//         if (didPop) return;
+//         await webNotifier.handleBackNavigation();
+//       },
+//       child: Scaffold(
+//         body: SafeArea(
+//           child: Stack(
+//             children: [
+//               if (webState.hasError)
+//                 ErrorCustomWidget(onRetry: webNotifier.reload)
+//               else
+//                 InAppWebView(
+//                   initialUrlRequest: URLRequest(
+//                     url: WebUri(AppConfiguration.appUrl),
+//                   ),
+//                   initialSettings: _getWebViewSettings(),
+//                   onWebViewCreated: (controller) =>
+//                       webNotifier.setController(controller),
+//                   onLoadStart: (controller, url) =>
+//                       webNotifier.setLoadStart(url?.toString() ?? ''),
+//                   onLoadStop: (controller, url) =>
+//                       webNotifier.setLoadStop(url?.toString() ?? ''),
+//                   onProgressChanged: (controller, p) =>
+//                       webNotifier.updateProgress(p),
+//                   onLoadError: (controller, url, code, message) =>
+//                       webNotifier.setLoadError(),
+//                   shouldOverrideUrlLoading: (controller, action) =>
+//                       _handleUrlOverride(action),
+//                 ),
+//               if (webState.isLoading && webState.progress < 100)
+//                 LoadingWidget(progress: webState.progress / 100),
+//             ],
+//           ),
+//         ),
+//         bottomNavigationBar: BottomNavBar(),
+//       ),
+//     );
+//   }
 
-  InAppWebViewSettings _getWebViewSettings() {
-    return InAppWebViewSettings(
-      javaScriptEnabled: AppConfiguration.enableJavaScript,
-      supportZoom: AppConfiguration.enableZoom,
-      builtInZoomControls: AppConfiguration.enableZoom,
-      useShouldOverrideUrlLoading: true,
-      allowFileAccess: true,
-      cacheEnabled: AppConfiguration.enableCache,
-      mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
-    );
-  }
+//   InAppWebViewSettings _getWebViewSettings() {
+//     return InAppWebViewSettings(
+//       javaScriptEnabled: AppConfiguration.enableJavaScript,
+//       supportZoom: AppConfiguration.enableZoom,
+//       builtInZoomControls: AppConfiguration.enableZoom,
+//       useShouldOverrideUrlLoading: true,
+//       allowFileAccess: true,
+//       cacheEnabled: AppConfiguration.enableCache,
+//       mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
+//     );
+//   }
 
-  Future<NavigationActionPolicy?> _handleUrlOverride(
-    NavigationAction action,
-  ) async {
-    final uri = action.request.url;
-    if (uri != null) {
-      final urlString = uri.toString();
-      if (urlString.contains('accounts.google.com'))
-        return NavigationActionPolicy.ALLOW;
+//   Future<NavigationActionPolicy?> _handleUrlOverride(
+//     NavigationAction action,
+//   ) async {
+//     final uri = action.request.url;
+//     if (uri != null) {
+//       final urlString = uri.toString();
+//       if (urlString.contains('accounts.google.com'))
+//         return NavigationActionPolicy.ALLOW;
 
-      if (urlString.startsWith('tel:') ||
-          urlString.startsWith('mailto:') ||
-          urlString.startsWith('whatsapp:')) {
-        if (await canLaunchUrl(uri)) {
-          await launchUrl(uri, mode: LaunchMode.externalApplication);
-        }
-        return NavigationActionPolicy.CANCEL;
-      }
-    }
-    return NavigationActionPolicy.ALLOW;
-  }
-}
+//       if (urlString.startsWith('tel:') ||
+//           urlString.startsWith('mailto:') ||
+//           urlString.startsWith('whatsapp:')) {
+//         if (await canLaunchUrl(uri)) {
+//           await launchUrl(uri, mode: LaunchMode.externalApplication);
+//         }
+//         return NavigationActionPolicy.CANCEL;
+//       }
+//     }
+//     return NavigationActionPolicy.ALLOW;
+//   }
+// }
 
 class WebViewScreen extends ConsumerStatefulWidget {
   const WebViewScreen({super.key});
