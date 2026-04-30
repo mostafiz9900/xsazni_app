@@ -16,7 +16,9 @@ class RoutePaths {
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
-    initialLocation: AppConfiguration.showSplash ? RoutePaths.splash : RoutePaths.home,
+    initialLocation: AppConfiguration.showSplash
+        ? RoutePaths.splash
+        : RoutePaths.home,
     debugLogDiagnostics: true,
     routes: [
       // Splash Route
@@ -25,12 +27,19 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'splash',
         builder: (context, state) => const SplashScreen(),
       ),
-      
+
       // Home Route
       GoRoute(
         path: RoutePaths.home,
         name: 'home',
         builder: (context, state) => const HomeScreen(),
+      ),
+
+      // WebView Route
+      GoRoute(
+        path: RoutePaths.webview,
+        name: 'webview',
+        builder: (context, state) => const WebViewScreen(),
         routes: [
           GoRoute(
             path: 'settings',
@@ -39,15 +48,8 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
         ],
       ),
-      
-      // WebView Route
-      GoRoute(
-        path: RoutePaths.webview,
-        name: 'webview',
-        builder: (context, state) => const WebViewScreen(),
-      ),
     ],
-    
+
     errorBuilder: (context, state) => Scaffold(
       body: Center(
         child: Column(

@@ -38,7 +38,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             end: Alignment.bottomRight,
             colors: [
               AppConfiguration.primaryColor,
-              AppConfiguration.primaryColor.shade700,
+              AppConfiguration.primaryColor.withOpacity(0.8),
             ],
           ),
         ),
@@ -75,10 +75,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                'Version ${AppConfiguration.version}',
-                style: const TextStyle(fontSize: 14, color: Colors.white70),
-              ),
+
               const SizedBox(height: 50),
               const CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),

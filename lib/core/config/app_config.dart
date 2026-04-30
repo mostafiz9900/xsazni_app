@@ -20,10 +20,9 @@ class AppConfiguration {
 
   /// থিম মোড (true = ডার্ক, false = লাইট)
   static const bool isDarkMode = false;
-
-  static const MaterialColor primaryColor = Colors.blueGrey;
-  static const Color secondaryColor = Color(0xFF00BCD4); // Cyan
-  static const Color accentColor = Color(0xFFFFC107); // Amber
+static const Color primaryColor = Colors.blueGrey; 
+  static const Color secondaryColor = Color(0xFF00BCD4); 
+  static const Color accentColor = Color(0xFFFFC107); 
   static const Color backgroundColor = Color(0xFFF5F5F5);
   static const Color errorColor = Color(0xFFE53935);
   static const Color successColor = Color(0xFF4CAF50);
@@ -43,7 +42,7 @@ class AppConfiguration {
   static const bool loadImages = true;
 
   /// ব্যাক বাটন এক্সিট (true = অ্যাপ এক্সিট, false = ওয়েবভিউ ব্যাক)
-  static const bool backButtonExitApp = false;
+  static const bool backButtonExitApp = true;
 
   // ==================== UI কনফিগারেশন ====================
 
