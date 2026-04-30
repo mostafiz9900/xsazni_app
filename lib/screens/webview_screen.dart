@@ -762,7 +762,9 @@ class _WebViewScreenState2 extends ConsumerState<WebViewScreen2> {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
-        if (didPop) return;
+        if (didPop) {
+          return;
+        }
 
         if (canGoBack) {
           await webViewController.goBack();
